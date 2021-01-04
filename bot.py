@@ -1,5 +1,5 @@
 import discord
-import random
+import numpy as np
 from discord.ext import commands
 
 client = commands.Bot(command_prefix='pls ')
@@ -12,9 +12,9 @@ async def on_ready():
 
 @client.command()
 async def milo(ctx):
-    index = random.randint(1, 7)
+    index = np.random.randint(1, 30)
     filename = (f'milo{index}.jpg')
-    await ctx.send(file=discord.File(filename))s
+    await ctx.send(file=discord.File(filename))
 
 
 @client.command()
@@ -60,8 +60,24 @@ async def clear(ctx, amount=1):
 
 
 @client.command()
+async def kick(ctx, member: discord.Member, *, reason=None):
+    await member.kick(reason=reason)
+
+
+@client.command()
 async def ban(ctx, member: discord.Member, *, reason=None):
     await member.ban(reason=reason)
 
 
-client.run('Nzk0MTMwOTAyNDM0MzE2MzAw.X-2WCQ.oGVlTEzCPkq-3RpOjZ9IYJlq_IE')
+@client.command()
+async def manual_override(ctx):
+    while True:
+        var = input("Message: ")
+        await ctx.send(var)
+
+        var2 = input("Continue? (y/n)")
+        if var2 == 'n':
+            break
+
+
+client.run('token')
