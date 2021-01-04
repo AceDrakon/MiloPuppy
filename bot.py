@@ -1,6 +1,9 @@
 import discord
 import numpy as np
 from discord.ext import commands
+from boto.s3.connection import S3Connection
+token = S3Connection(os.environ['TOKEN'])
+
 
 client = commands.Bot(command_prefix='pls ')
 
@@ -80,4 +83,4 @@ async def manual_override(ctx):
             break
 
 
-client.run('token')
+client.run(token)
